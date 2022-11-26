@@ -56,6 +56,10 @@ struct Home: View {
             // ?
             Spacer()
         }
+        .onAppear(perform: {
+            HomeModel.loactionManager.delegate = HomeModel
+            HomeModel.loactionManager.requestWhenInUseAuthorization()
+        })
     }
 }
 
