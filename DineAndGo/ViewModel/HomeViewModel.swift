@@ -6,9 +6,28 @@
 //
 
 import SwiftUI
+import CoreLocation
 
-class HomeViewModel: ObservableObject{
+class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
+    @Published var loactionManager = CLLocationManager()
     @Published var search = ""
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        
+        //Checking location assess...
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse:
+            print("authorized")
+        case .denied:
+            print("denied")
+        default:
+            print("unknown")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error.localizedDescription)
+    }
 }
 
 //struct HomeViewModel: View {
