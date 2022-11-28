@@ -24,6 +24,7 @@
 		AE60430D293150B7008DB0C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE60430F293150B7008DB0C9 /* DineAndGo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DineAndGo.entitlements; sourceTree = "<group>"; };
 		AE604311293150B7008DB0C9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AEB5EFDB2934646200E1EB6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +80,7 @@
 		AE604308293150B6008DB0C9 /* DineAndGo */ = {
 			isa = PBXGroup;
 			children = (
+				AEB5EFDB2934646200E1EB6E /* Info.plist */,
 				42F3EE3F29315B8F0076DC5E /* ViewModel */,
 				42F3EE3E29315B870076DC5E /* Model */,
 				42F3EE3D29315B360076DC5E /* View */,
@@ -299,6 +301,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"DineAndGo/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DineAndGo/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please Allow to Read Location For Delivery";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -335,6 +339,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"DineAndGo/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DineAndGo/Info.plist;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please Allow to Read Location For Delivery";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

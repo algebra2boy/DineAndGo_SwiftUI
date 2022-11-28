@@ -12,9 +12,12 @@ struct Home: View {
         // vertical space size
         
         VStack(spacing: 10){
-            // hor space size for each item
+            /// topmost section
+            // create space size for each item
             HStack(spacing: 15){
+                // create a clickable button
                 Button(action: {}, label: {
+                    // the Button has a label which is a 3 line image
                     Image(systemName: "line.3.horizontal")
                         .font(.title)
                         .foregroundColor(Color.pink)
@@ -30,12 +33,13 @@ struct Home: View {
                     .foregroundColor(.pink)
                 // push HStack to left
                 Spacer(minLength: 0)
-                    
+                
             }
             .padding([.horizontal, .top])
             
             Divider()
             
+            /// search bar section
             HStack(spacing: 15){
                 TextField("Search", text: $HomeModel.search) //'Binding<String>'
                 
@@ -56,6 +60,16 @@ struct Home: View {
             // ?
             Spacer()
         }
+        /// add an action to perform before this view happens
+        .onAppear(perform: {
+            
+            // calling location delgate...
+            HomeModel.locationManager.delegate = HomeModel
+            HomeModel.locationManager.requestWhenInUseAuthorization()
+            // Modifying Info.plist
+        }
+        
+        )
     }
 }
 
