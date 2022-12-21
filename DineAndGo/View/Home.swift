@@ -73,6 +73,7 @@ struct Home: View {
             HomeModel.loactionManager.delegate = HomeModel
             HomeModel.loactionManager.requestWhenInUseAuthorization()
         })
+        
     }
 }
 
