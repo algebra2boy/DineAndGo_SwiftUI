@@ -17,6 +17,10 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
     @Published var userAddress = ""
     @Published var noLocation = false
     
+    //Menu...
+    @Published var showMenu = false
+    
+    
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         
         //Checking location assess...
@@ -43,6 +47,7 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
         
         // reading User Location and Extracting details...
         self.userLocation = locations.last
+        self.extractLocation()
     }
     
     func extractLocation() {

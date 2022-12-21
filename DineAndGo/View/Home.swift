@@ -16,15 +16,17 @@ struct Home: View {
             VStack(spacing: 10){
                 // hor space size for each item
                 HStack(spacing: 15){
-                    Button(action: {}, label: {
+                    Button(action: {
+                        withAnimation(.easeIn){HomeModel.showMenu.toggle()}
+                    }, label: {
                         Image(systemName: "line.3.horizontal")
                             .font(.title)
                             .foregroundColor(Color.pink)
-                    }
-                    )
+                    })
                     
                     Text(HomeModel.userLocation == nil ? "Locating..." : "Deliver To")
                         .foregroundColor(.black)
+                    
                     Text(HomeModel.userAddress)
                         .font(.caption)
                         .fontWeight(.heavy)
@@ -58,6 +60,22 @@ struct Home: View {
                 Spacer()
             }
             
+            //Side Menu...
+            HStack{
+                Menu(homeData: HomeModel)
+                    // Move Effect from left...
+                    .offset(x:HomeModel.showMenu ? 0 : -UIScreen.main.bounds.width / 1.6)
+                
+                Spacer(minLength: 0)
+            }
+            .background(
+                Color.black.opacity(HomeModel.showMenu ? 0.3 : 0).ignoresSafeArea()
+                // clsing when Taps on outside...
+                    .onTapGesture(perform: {
+                        withAnimation(.easeIn){HomeModel.showMenu.toggle()}
+                    })
+                )
+            
             if HomeModel.noLocation{
                 Text("Please Enable Location Access In Setttings to Further Move On!!!")
                     .foregroundColor(.black)
@@ -71,7 +89,6 @@ struct Home: View {
         }
         .onAppear(perform: {
             HomeModel.loactionManager.delegate = HomeModel
-            HomeModel.loactionManager.requestWhenInUseAuthorization()
         })
         
     }
