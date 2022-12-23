@@ -7,6 +7,8 @@
 
 import SwiftUI
 import CoreLocation
+import Firebase
+import FirebaseAuth
 
 class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
     @Published var loactionManager = CLLocationManager()
@@ -48,6 +50,9 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
         // reading User Location and Extracting details...
         self.userLocation = locations.last
         self.extractLocation()
+        
+        // after extracting location looging ing.....
+        self.login()
     }
     
     func extractLocation() {
@@ -63,7 +68,20 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
             self.userAddress = address
         }
     }
+    
+    // anynomus login for reading batabase...
+
+    func login() {
+        Auth.auth().signInAnonymously { (res, err) in
+            if err != nil {
+                print(err!.localizedDescription)
+                return
+            }
+            print("Success = \(res!.user.uid))")
+        }
+    }
 }
+
 
 //struct HomeViewModel: View {
 //    var body: some View {
