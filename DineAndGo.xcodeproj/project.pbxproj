@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		42F3EE4129315BA80076DC5E /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F3EE4029315BA80076DC5E /* Home.swift */; };
 		42F3EE4329315BC10076DC5E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F3EE4229315BC10076DC5E /* HomeViewModel.swift */; };
+		AE58E6812956344800FFBA41 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE58E6802956344800FFBA41 /* Menu.swift */; };
 		AE60430A293150B6008DB0C9 /* DineAndGoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE604309293150B6008DB0C9 /* DineAndGoApp.swift */; };
 		AE60430C293150B6008DB0C9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE60430B293150B6008DB0C9 /* ContentView.swift */; };
 		AE60430E293150B7008DB0C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE60430D293150B7008DB0C9 /* Assets.xcassets */; };
@@ -18,13 +19,13 @@
 /* Begin PBXFileReference section */
 		42F3EE4029315BA80076DC5E /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		42F3EE4229315BC10076DC5E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		AE58E6802956344800FFBA41 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		AE604306293150B6008DB0C9 /* DineAndGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DineAndGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE604309293150B6008DB0C9 /* DineAndGoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DineAndGoApp.swift; sourceTree = "<group>"; };
 		AE60430B293150B6008DB0C9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AE60430D293150B7008DB0C9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AE60430F293150B7008DB0C9 /* DineAndGo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DineAndGo.entitlements; sourceTree = "<group>"; };
 		AE604311293150B7008DB0C9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		AEB5EFDB2934646200E1EB6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +43,7 @@
 			isa = PBXGroup;
 			children = (
 				42F3EE4029315BA80076DC5E /* Home.swift */,
+				AE58E6802956344800FFBA41 /* Menu.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -80,7 +82,6 @@
 		AE604308293150B6008DB0C9 /* DineAndGo */ = {
 			isa = PBXGroup;
 			children = (
-				AEB5EFDB2934646200E1EB6E /* Info.plist */,
 				42F3EE3F29315B8F0076DC5E /* ViewModel */,
 				42F3EE3E29315B870076DC5E /* Model */,
 				42F3EE3D29315B360076DC5E /* View */,
@@ -175,6 +176,7 @@
 				42F3EE4129315BA80076DC5E /* Home.swift in Sources */,
 				AE60430A293150B6008DB0C9 /* DineAndGoApp.swift in Sources */,
 				42F3EE4329315BC10076DC5E /* HomeViewModel.swift in Sources */,
+				AE58E6812956344800FFBA41 /* Menu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +304,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DineAndGo/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please Allow to Read Location For Delivery";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -340,6 +343,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DineAndGo/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Please Allow to Read Location For Delivery";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
