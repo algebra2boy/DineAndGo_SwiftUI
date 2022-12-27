@@ -40,16 +40,13 @@ struct Home: View {
                 Divider()
                 
                 HStack(spacing: 15){
+                    
+                    Image(systemName: "magnifyingglass")
+                        .font(.title2)
+                        .foregroundColor(.gray)
+                    
                     TextField("Search", text: $HomeModel.search) //'Binding<String>'
                     
-                    if HomeModel.search != "" {
-                        Button(action: {}, label: {
-                            Image(systemName: "magnifyingglass")
-                                .font(.title2)
-                                .foregroundColor(.gray)
-                            
-                        }).animation(.easeIn, value: 0)
-                    }
                 }
                 .padding(.horizontal)
                 .padding(.top, 10)
@@ -57,7 +54,45 @@ struct Home: View {
                 Divider()
                 
                 // ?
-                Spacer()
+                ScrollView(.vertical, showsIndicators: false, content: {
+                    
+                    VStack(spacing: 25){
+                        
+                        ForEach(HomeModel.filtered){item in
+                            
+                            // Item View...
+                            ZStack(alignment: Alignment(horizontal: .center, vertical: .top), content:
+                                    {
+
+                                ItemView(item: item)
+                                
+                                HStack{
+                                    
+                                    Text("Free Delivery!")
+                                        .foregroundColor(.white)
+                                        .padding(.vertical, 10)
+                                        .padding(.horizontal, 10)
+                                        .background(.pink)
+                                    
+                                    Spacer(minLength: 0)
+                                    
+                                    Button(action: {}, label: {
+                                        
+                                        Image(systemName: "plus")
+                                            .foregroundColor(.white)
+                                            .padding(10)
+                                            .background(.pink)
+                                            .clipShape(Circle())
+                                    })
+                                }
+                                .padding(.trailing, 10)
+                                .padding(.top, 10)
+                            })
+                            .frame(width: UIScreen.main.bounds.width - 30)
+                            
+                        }
+                    }
+                })
             }
             
             //Side Menu...
@@ -90,6 +125,24 @@ struct Home: View {
         }
         .onAppear(perform: {
             HomeModel.loactionManager.delegate = HomeModel
+        })
+        .onChange(of: HomeModel.search, perform: {value in
+            
+            // to avoid Continues search reqests...
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                
+                if value == HomeModel.search && (HomeModel.search != "") {
+                    
+                    // Search data...
+                    HomeModel.filterData()
+                }
+            }
+            
+            if HomeModel.search == ""{
+                
+                // reset all data...
+                withAnimation(.linear){HomeModel.filtered = HomeModel.items}
+            }
         })
         
     }
