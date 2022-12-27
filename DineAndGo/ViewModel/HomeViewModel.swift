@@ -26,6 +26,9 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
     @Published var items: [Item] = []
     @Published var filtered: [Item] = []
     
+    // Cart items...
+    @Published var cartItems: [Cart] = []
+    
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         
         //Checking location assess...
@@ -102,6 +105,7 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
                 let ratings = doc.get("item_ratings") as! String
                 
                 return Item(id: id, item_name: name, item_cost: cost, item_details: details, item_image: image, item_ratings: ratings)
+                
             })
             
             self.filtered = self.items
@@ -115,6 +119,48 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
                 return $0.item_name.lowercased().contains(self.search.lowercased())
             }
         }
+    }
+    
+    func addToCart(item: Item) {
+        
+        // checking it is added...
+        
+        self.items[getIndex(item: item, isCartIndex: false)].isAdded = !item.isAdded
+        
+        // updating filtered arry also for search bar result...
+        self.filtered[getIndex(item: item, isCartIndex: false)].isAdded = !item.isAdded
+        
+        if item.isAdded{
+            
+            // remove from the list...
+            
+            self.cartItems.remove(at: getIndex(item: item, isCartIndex: true))
+            
+            return
+            
+        } else {
+            // else adding
+            
+            self.cartItems.append(Cart(item: item, quantity: 1))
+        }
+        
+    }
+    
+    func getIndex(item:  Item, isCartIndex: Bool)->Int{
+        
+        let index = self.items.firstIndex { (item1) -> Bool in
+            
+            return item.id == item1.id
+            
+        } ?? 0
+        
+        let cartIndex = self.cartItems.firstIndex { (item1) -> Bool in
+            return item.id == item1.item.id
+            
+        } ?? 0
+        
+        return isCartIndex ? cartIndex : index
+      
     }
 }
 

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4205873229595D6D001802E0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4205873129595D6D001802E0 /* Item.swift */; };
 		42058734295A52AD001802E0 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42058733295A52AD001802E0 /* ItemView.swift */; };
+		42058736295B9EFD001802E0 /* Cart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42058735295B9EFD001802E0 /* Cart.swift */; };
+		42058738295BB110001802E0 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42058737295BB110001802E0 /* CartView.swift */; };
 		429B5D682953C6CC002B3A06 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 429B5D672953C6CC002B3A06 /* Menu.swift */; };
 		429B5D6C29564850002B3A06 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 429B5D6E29564850002B3A06 /* GoogleService-Info.plist */; };
 		429B5D8629564B2F002B3A06 /* absl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 429B5D7629564B2D002B3A06 /* absl.framework */; };
@@ -24,6 +26,8 @@
 /* Begin PBXFileReference section */
 		4205873129595D6D001802E0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		42058733295A52AD001802E0 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		42058735295B9EFD001802E0 /* Cart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cart.swift; sourceTree = "<group>"; };
+		42058737295BB110001802E0 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		429B5D672953C6CC002B3A06 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		429B5D6D29564850002B3A06 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		429B5D6F29564894002B3A06 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "en.lproj/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -83,6 +87,7 @@
 				42F3EE4029315BA80076DC5E /* Home.swift */,
 				429B5D672953C6CC002B3A06 /* Menu.swift */,
 				42058733295A52AD001802E0 /* ItemView.swift */,
+				42058737295BB110001802E0 /* CartView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -91,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				4205873129595D6D001802E0 /* Item.swift */,
+				42058735295B9EFD001802E0 /* Cart.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -283,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42058738295BB110001802E0 /* CartView.swift in Sources */,
 				AE60430C293150B6008DB0C9 /* ContentView.swift in Sources */,
 				42F3EE4129315BA80076DC5E /* Home.swift in Sources */,
 				AE60430A293150B6008DB0C9 /* DineAndGoApp.swift in Sources */,
@@ -290,6 +297,7 @@
 				42058734295A52AD001802E0 /* ItemView.swift in Sources */,
 				4205873229595D6D001802E0 /* Item.swift in Sources */,
 				429B5D682953C6CC002B3A06 /* Menu.swift in Sources */,
+				42058736295B9EFD001802E0 /* Cart.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

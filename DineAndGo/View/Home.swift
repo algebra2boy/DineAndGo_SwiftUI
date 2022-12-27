@@ -74,19 +74,22 @@ struct Home: View {
                                         .padding(.horizontal, 10)
                                         .background(.pink)
                                     
-                                    Spacer(minLength: 0)
+                                    Spacer()
                                     
-                                    Button(action: {}, label: {
-                                        
-                                        Image(systemName: "plus")
+                                    Button(action: {HomeModel.addToCart(item: item)}, label: {
+
+                                        Image(systemName: item.isAdded ? "checkmark" : "plus")
                                             .foregroundColor(.white)
                                             .padding(10)
-                                            .background(.pink)
+                                            .background(item.isAdded ? .green : .pink)
                                             .clipShape(Circle())
+
                                     })
+                                    
                                 }
                                 .padding(.trailing, 10)
                                 .padding(.top, 10)
+                                
                             })
                             .frame(width: UIScreen.main.bounds.width - 30)
                             
@@ -144,6 +147,7 @@ struct Home: View {
                 withAnimation(.linear){HomeModel.filtered = HomeModel.items}
             }
         })
+        
         
     }
 }
