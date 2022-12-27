@@ -10,7 +10,6 @@
 		42F3EE4129315BA80076DC5E /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F3EE4029315BA80076DC5E /* Home.swift */; };
 		42F3EE4329315BC10076DC5E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F3EE4229315BC10076DC5E /* HomeViewModel.swift */; };
 		AE58E6812956344800FFBA41 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE58E6802956344800FFBA41 /* Menu.swift */; };
-		AE5BF2A3295B8281007F8444 /* item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE5BF2A2295B8281007F8444 /* item.swift */; };
 		AE60430A293150B6008DB0C9 /* DineAndGoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE604309293150B6008DB0C9 /* DineAndGoApp.swift */; };
 		AE60430C293150B6008DB0C9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE60430B293150B6008DB0C9 /* ContentView.swift */; };
 		AE60430E293150B7008DB0C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE60430D293150B7008DB0C9 /* Assets.xcassets */; };
@@ -18,6 +17,7 @@
 		AE63125B295AA0EA00E1C623 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE63125A295AA0EA00E1C623 /* GoogleService-Info.plist */; };
 		AE872F7B295B8D5900F32453 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = AE872F7A295B8D5900F32453 /* SDWebImageSwiftUI */; };
 		AE872F7D295B917C00F32453 /* ItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE872F7C295B917C00F32453 /* ItemView.swift */; };
+		AE872F81295BA99100F32453 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE872F80295BA99100F32453 /* Item.swift */; };
 		D608B88B18252DD3DDE47654 /* Pods_DineAndGo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4216390461D434DFAA96C6DC /* Pods_DineAndGo.framework */; };
 /* End PBXBuildFile section */
 
@@ -28,7 +28,6 @@
 		42F3EE4229315BC10076DC5E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		61729E020698CB767790E86C /* Pods-DineAndGo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DineAndGo.release.xcconfig"; path = "Target Support Files/Pods-DineAndGo/Pods-DineAndGo.release.xcconfig"; sourceTree = "<group>"; };
 		AE58E6802956344800FFBA41 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
-		AE5BF2A2295B8281007F8444 /* item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = item.swift; sourceTree = SOURCE_ROOT; };
 		AE604306293150B6008DB0C9 /* DineAndGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DineAndGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE604309293150B6008DB0C9 /* DineAndGoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DineAndGoApp.swift; sourceTree = "<group>"; };
 		AE60430B293150B6008DB0C9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -37,6 +36,7 @@
 		AE604311293150B7008DB0C9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		AE63125A295AA0EA00E1C623 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AE872F7C295B917C00F32453 /* ItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemView.swift; sourceTree = "<group>"; };
+		AE872F80295BA99100F32453 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +65,7 @@
 		42F3EE3E29315B870076DC5E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				AE5BF2A2295B8281007F8444 /* item.swift */,
+				AE872F80295BA99100F32453 /* Item.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -262,8 +262,8 @@
 				42F3EE4129315BA80076DC5E /* Home.swift in Sources */,
 				AE60430A293150B6008DB0C9 /* DineAndGoApp.swift in Sources */,
 				42F3EE4329315BC10076DC5E /* HomeViewModel.swift in Sources */,
+				AE872F81295BA99100F32453 /* Item.swift in Sources */,
 				AE872F7D295B917C00F32453 /* ItemView.swift in Sources */,
-				AE5BF2A3295B8281007F8444 /* item.swift in Sources */,
 				AE58E6812956344800FFBA41 /* Menu.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
