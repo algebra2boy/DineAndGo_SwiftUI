@@ -59,7 +59,51 @@ struct Home: View {
                 
                 Divider()
                 
-                Spacer()
+                // displaying the scroll view for the food pictures
+                ScrollView(.vertical, showsIndicators: false, content: {
+                    
+                    VStack(spacing: 25) {
+                        
+                        // accessing each item using for each loop
+                        ForEach(HomeModel.items) { item in
+                            
+                            // Item View
+                            // Adding another layer, which is for delivery status and plus sign, on top of the picture
+                            
+                            ZStack(alignment: Alignment(horizontal: .center,
+                                                        vertical: .top), content: {
+                                ItemView(item: item)
+                                
+                                HStack {
+                                    
+                                    // delivery status
+                                    Text("Free Delivery")
+                                        .foregroundColor(.white) // the text color
+                                        .padding(.vertical, 10) // adding padding on top and bottom
+                                        .padding(.horizontal)
+                                        .background(Color.pink) // the container's background color
+                                    
+                                    Spacer(minLength: 0)
+                                    
+                                    Button(action: {}, label: {
+                                        
+                                        Image(systemName: "plus")
+                                            .foregroundColor(.white)
+                                            .padding(10)
+                                            .background(Color.pink)
+                                            .clipShape(Circle()) // set a clipped circle shape
+                                    })
+                                    
+                                }
+                                .padding(.trailing, 10)
+                                .padding(.top, 10)
+   
+                            })
+                        }
+                    }.padding(.top, 10) // add a little bit of space betweeen pictures on top
+                    
+                })
+                
             }
             
             // Side Menu

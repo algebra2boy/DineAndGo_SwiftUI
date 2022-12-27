@@ -2,11 +2,12 @@
 //  HomeViewModel.swift
 //  DineAndGo
 //
-//  Created by CHENGTAO on 11/25/22.
+//  Created by Yongye on 11/25/22.
 //
 
 import SwiftUI
 import CoreLocation
+import Firebase
 
 class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
     @Published var search = ""
@@ -21,6 +22,9 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
     
     // Menu
     @Published var showMenu : Bool = false
+    
+    // ItemData
+    @Published var items: [Item] = []
     
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -50,6 +54,9 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
         // reading user's last location and extracting details from that location
         self.userLocation = locations.last
         self.extractLocation()
+        
+        // after extracting location loggining
+        self.login()
     }
     
     func extractLocation() {
@@ -73,8 +80,54 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
             self.userAddress = address
             
         }
+    }
+    
+    // anynomous login for reading database ...
+    
+    func login() {
         
+        Auth.auth().signInAnonymously { (auth_data_result, error) in
+            
+            // if there is an error, then print out localized error description
+            if error != nil {
+                print(error!.localizedDescription)
+                return
+            }
+            // otherwise print out the user's id from the data result
+            print("Success \(auth_data_result!.user.uid)")
+            
+            // After loggining to Firestore
+            self.fetchData()
+        }
+    }
+    
+    // Fetching Items data from the firestore
+    
+    func fetchData() {
         
+        let database = Firestore.firestore()
+        
+        database.collection("Items").getDocuments { (snapshot, error) in
+            // making sure that snap is not nil
+            guard let itemData = snapshot else {return}
+            
+            self.items = itemData.documents.compactMap({ (document) -> Item? in
+                
+                // all the item fields must be filled because I assume they not nil (indicated by the !)
+                let id = document.documentID
+                let name = document.get("item_name") as! String
+                // must declare a number in Firestore, otherwise it would have a lot of error
+                let cost = document.get("item_cost") as! NSNumber
+                let ratings = document.get("item_ratings") as! String
+                let image = document.get("item_image") as! String
+                let details = document.get("item_details") as! String
+                
+                return Item(id: id, item_name: name, item_cost: cost, item_details: details, item_image: image, item_ratings: ratings)
+                
+            })
+            
+            
+        }
         
     }
 }
