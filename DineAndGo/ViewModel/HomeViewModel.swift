@@ -25,6 +25,8 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
     
     // ItemData
     @Published var items: [Item] = []
+    // Filtered data after searching with key words
+    @Published var filtered_items: [Item] = []
     
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -64,8 +66,7 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
         CLGeocoder().reverseGeocodeLocation(self.userLocation) {
             (response, error) in
             // data might be missing
-            guard let safeData = response
-            else {return}
+            guard let safeData = response else {return}
             
             var address = ""
             
@@ -110,7 +111,6 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
         database.collection("Items").getDocuments { (snapshot, error) in
             // making sure that snap is not nil
             guard let itemData = snapshot else {return}
-            
             self.items = itemData.documents.compactMap({ (document) -> Item? in
                 
                 // all the item fields must be filled because I assume they not nil (indicated by the !)
@@ -125,10 +125,21 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
                 return Item(id: id, item_name: name, item_cost: cost, item_details: details, item_image: image, item_ratings: ratings)
                 
             })
-            
-            
+            self.filtered_items = self.items
         }
         
     }
+    
+    // Search or Filter (search engine)
+    func filterData() {
+        
+        withAnimation(.linear) {
+            self.filtered_items = self.items.filter {
+                return $0.item_name.lowercased().contains(self.search.lowercased())
+            }
+        }
+        
+    }
+    
 }
 

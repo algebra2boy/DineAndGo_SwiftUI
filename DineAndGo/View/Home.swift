@@ -43,16 +43,13 @@ struct Home: View {
                 
                 /// search bar section
                 HStack(spacing: 15){
+                    
+                    Image(systemName: "magnifyingglass")
+                        .font(.title2)
+                        .foregroundColor(.gray)
+                    
                     TextField("Search", text: $HomeModel.search) //'Binding<String>'
                     
-                    if HomeModel.search != "" {
-                        Button(action: {}, label: {
-                            Image(systemName: "magnifyingglass")
-                                .font(.title2)
-                                .foregroundColor(.gray)
-                            
-                        }).animation(.easeIn, value: 0)
-                    }
                 }
                 .padding(.horizontal)
                 .padding(.top, 10)
@@ -61,11 +58,11 @@ struct Home: View {
                 
                 // displaying the scroll view for the food pictures
                 ScrollView(.vertical, showsIndicators: false, content: {
-                    
+                    // white space for each food picture
                     VStack(spacing: 25) {
                         
                         // accessing each item using for each loop
-                        ForEach(HomeModel.items) { item in
+                        ForEach(HomeModel.filtered_items) { item in
                             
                             // Item View
                             // Adding another layer, which is for delivery status and plus sign, on top of the picture
@@ -83,7 +80,7 @@ struct Home: View {
                                         .padding(.horizontal)
                                         .background(Color.pink) // the container's background color
                                     
-                                    Spacer(minLength: 0)
+                                    Spacer(minLength: 0) // push the the text all the way to left
                                     
                                     Button(action: {}, label: {
                                         
@@ -150,9 +147,29 @@ struct Home: View {
         .onAppear(perform: {
             // calling location delgate...
             HomeModel.locationManager.delegate = HomeModel
-        }
-        
-        )
+        })
+        // add a modifier for this view that fires an action when a specific value changes
+        .onChange(of: HomeModel.search, perform: { value in
+            
+            // to avoid continute search requests
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                
+                if value == HomeModel.search && HomeModel.search != ""{
+                    // search data
+                    HomeModel.filterData()
+                }
+            }
+            
+            // if the user clears up the search bar
+            if HomeModel.search == "" {
+                // reset all the filtered_data that pre-exsited
+                withAnimation(.linear) {
+                    HomeModel.filtered_items = HomeModel.items
+
+                }
+            }
+            
+        })
     }
 }
 

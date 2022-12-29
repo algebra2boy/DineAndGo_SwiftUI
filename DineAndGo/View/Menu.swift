@@ -21,16 +21,16 @@ struct Menu: View {
                         .fontWeight(.bold)
                         .foregroundColor(.black)
                     
-                    Spacer(minLength: 0)
+                    Spacer(minLength: 0) // push all the way to left
                 }.padding()
                 
             })
             
-            Spacer()
+            Spacer() // push all the way to buttom
             
             HStack {
                 
-                Spacer()
+                Spacer() // push to right
                 
                 Text("Version 0.1")
                     .fontWeight(.bold)
@@ -38,7 +38,8 @@ struct Menu: View {
             }.padding(10) // 10 pixel away from the sidebar
             
         }
-        .frame(width: UIScreen.main.bounds.width / 1.6)
+        // width: UIScreen.main.bounds.width / 2 is half of the width of the phone sccreen
+        .frame(width: UIScreen.main.bounds.width / 1.6) // important to set up the sidebar view
         .background(Color.white)
     }
 }
