@@ -29,6 +29,8 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
     // Cart items...
     @Published var cartItems: [Cart] = []
     
+    @Published var isOrdered = false
+    
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         
         //Checking location assess...
@@ -120,6 +122,7 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
             }
         }
     }
+        
     
     func addToCart(item: Item) {
         
@@ -128,7 +131,11 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
         self.items[getIndex(item: item, isCartIndex: false)].isAdded = !item.isAdded
         
         // updating filtered arry also for search bar result...
-        self.filtered[getIndex(item: item, isCartIndex: false)].isAdded = !item.isAdded
+        let filterIndx = self.filtered.firstIndex{ (item1)->Bool in
+            return item.id == item1.id
+        } ?? 0
+        
+        self.filtered[filterIndx].isAdded = !item.isAdded
         
         if item.isAdded{
             
@@ -146,6 +153,64 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
         
     }
     
+    // writing user's oder data to firebase...
+    func updateOrder(){
+        
+        // connect to firestore
+        let db = Firestore.firestore()
+        
+        // creating dict of food detail...
+                
+        if isOrdered{
+            
+            // for cancel order
+            isOrdered = false
+            
+            db.collection("Users").document(Auth.auth().currentUser!.uid).delete{ (err) in
+                
+                if err != nil{
+                    self.isOrdered = true
+                }
+                
+            }
+            return
+        }
+        
+        var details : [[String: Any]] = []
+        
+        cartItems.forEach { (cart) in
+            
+            details.append([
+                
+                "item_name": cart.item.item_name,
+                "item_quantity": cart.quantity,
+                "item_cost": cart.item.item_cost
+                
+            ])
+        }
+        
+        isOrdered = true
+                
+        db.collection("Users").document(Auth.auth().currentUser!.uid).setData([
+            
+            "ordered_food": details,
+            "total_cost": calculateTotalPrice(),
+            "ordered_location": GeoPoint(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+            
+        ]) { (err) in
+            
+            if err != nil {
+                self.isOrdered = false
+                return
+            }
+            
+            print("Success")
+            
+        }
+        print(isOrdered)
+    }
+    
+    
     func getIndex(item:  Item, isCartIndex: Bool)->Int{
         
         let index = self.items.firstIndex { (item1) -> Bool in
@@ -162,5 +227,26 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
         return isCartIndex ? cartIndex : index
       
     }
+    
+    func calculateTotalPrice()->String{
+        
+        var price : Float = 0
+        
+        cartItems.forEach{ (item) in
+            price += Float(item.quantity) * Float(truncating: item.item.item_cost)
+        }
+        
+        return getPrice(value: price)
+    }
+    
+    func getPrice(value: Float)->String{
+        
+        let format = NumberFormatter()
+        format.numberStyle = .currency
+        
+        return format.string(from: NSNumber(value: value)) ?? ""
+        
+    }
+    
 }
 

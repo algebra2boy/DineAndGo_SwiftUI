@@ -54,48 +54,58 @@ struct Home: View {
                 Divider()
                 
                 // ?
-                ScrollView(.vertical, showsIndicators: false, content: {
+                if HomeModel.items.isEmpty {
                     
-                    VStack(spacing: 25){
+                    Spacer()
+                    
+                    ProgressView()
+                    
+                    Spacer()
+                    
+                } else {
+                    ScrollView(.vertical, showsIndicators: false, content: {
                         
-                        ForEach(HomeModel.filtered){item in
+                        VStack(spacing: 25){
                             
-                            // Item View...
-                            ZStack(alignment: Alignment(horizontal: .center, vertical: .top), content:
-                                    {
-
-                                ItemView(item: item)
+                            ForEach(HomeModel.filtered){item in
                                 
-                                HStack{
+                                // Item View...
+                                ZStack(alignment: Alignment(horizontal: .center, vertical: .top), content:
+                                        {
                                     
-                                    Text("Free Delivery!")
-                                        .foregroundColor(.white)
-                                        .padding(.vertical, 10)
-                                        .padding(.horizontal, 10)
-                                        .background(.pink)
+                                    ItemView(item: item)
                                     
-                                    Spacer()
-                                    
-                                    Button(action: {HomeModel.addToCart(item: item)}, label: {
-
-                                        Image(systemName: item.isAdded ? "checkmark" : "plus")
+                                    HStack{
+                                        
+                                        Text("Free Delivery!")
                                             .foregroundColor(.white)
-                                            .padding(10)
-                                            .background(item.isAdded ? .green : .pink)
-                                            .clipShape(Circle())
-
-                                    })
+                                            .padding(.vertical, 10)
+                                            .padding(.horizontal, 10)
+                                            .background(.pink)
+                                        
+                                        Spacer()
+                                        
+                                        Button(action: {HomeModel.addToCart(item: item)}, label: {
+                                            
+                                            Image(systemName: item.isAdded ? "checkmark" : "plus")
+                                                .foregroundColor(.white)
+                                                .padding(10)
+                                                .background(item.isAdded ? .green : .pink)
+                                                .clipShape(Circle())
+                                            
+                                        })
+                                        
+                                    }
+                                    .padding(.trailing, 10)
+                                    .padding(.top, 10)
                                     
-                                }
-                                .padding(.trailing, 10)
-                                .padding(.top, 10)
+                                })
+                                .frame(width: UIScreen.main.bounds.width - 30)
                                 
-                            })
-                            .frame(width: UIScreen.main.bounds.width - 30)
-                            
+                            }
                         }
-                    }
-                })
+                    })
+                }
             }
             
             //Side Menu...
