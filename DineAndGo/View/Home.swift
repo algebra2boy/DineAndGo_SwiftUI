@@ -17,7 +17,8 @@ struct Home: View {
                 HStack(spacing: 15){
                     // create a clickable button
                     Button(action: {
-                        withAnimation(.easeIn){HomeModel.showMenu.toggle()
+                        withAnimation(.easeIn){
+                            HomeModel.showMenu.toggle()
                         }},
                            label: {
                         // the Button has a label which is a 3 line image
@@ -69,6 +70,7 @@ struct Home: View {
                             
                             ZStack(alignment: Alignment(horizontal: .center,
                                                         vertical: .top), content: {
+                                // the display order of Zstack is bottom to top
                                 ItemView(item: item)
                                 
                                 HStack {
@@ -82,12 +84,15 @@ struct Home: View {
                                     
                                     Spacer(minLength: 0) // push the the text all the way to left
                                     
-                                    Button(action: {}, label: {
+                                    Button(action: {
+                                        // once this button is pressed, the item is added to the shopping car
+                                        HomeModel.addItemToCart(item: item)
+                                    }, label: {
                                         
-                                        Image(systemName: "plus")
+                                        Image(systemName: item.isAdded ? "checkmark" : "plus")
                                             .foregroundColor(.white)
                                             .padding(10)
-                                            .background(Color.pink)
+                                            .background(item.isAdded ? Color.green : Color.pink)
                                             .clipShape(Circle()) // set a clipped circle shape
                                     })
                                     

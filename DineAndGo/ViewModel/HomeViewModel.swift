@@ -25,8 +25,12 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
     
     // ItemData
     @Published var items: [Item] = []
+    
     // Filtered data after searching with key words
     @Published var filtered_items: [Item] = []
+    
+    // Cart item data
+    @Published var carItems: [Cart] = []
     
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
@@ -138,6 +142,45 @@ class HomeViewModel: NSObject, ObservableObject, CLLocationManagerDelegate{
                 return $0.item_name.lowercased().contains(self.search.lowercased())
             }
         }
+        
+    }
+    
+    // add to the Cart
+    
+    func addItemToCart(item: Item) {
+        
+        // checking the item is added
+        // negate the added boolean logic
+        self.items[getIndex(item: item, isCarIndex: false)].isAdded = !item.isAdded
+        // updating the filtered array also for search bar results
+        self.filtered_items[getIndex(item: item, isCarIndex: false)].isAdded = !item.isAdded
+        
+        if item.isAdded {
+            // removing from the cart
+            self.carItems.remove(at: getIndex(item: item, isCarIndex: true))
+        } else {
+            // else adding
+            self.carItems.append(Cart(item: item, quantity: 1))
+        }
+        
+    }
+    
+    func getIndex(item: Item, isCarIndex: Bool) -> Int {
+        
+        // a closure that returns true if the item exists
+        // firstIndex internal logic is like passing a comparison condition to see if there is a match
+        // otherwise it defaults to be 0
+        let index = self.items.firstIndex { (firstItem) -> Bool in
+            return item.id == firstItem.id
+        } ?? 0
+        
+        let cartIndex = self.carItems.firstIndex { (firstItem) -> Bool in
+            return item.id == firstItem.item.id
+            
+        } ?? 0
+        
+        // if it is true, then cartIndex, otherwise index
+        return isCarIndex ? cartIndex : index
         
     }
     
